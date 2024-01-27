@@ -1,21 +1,22 @@
 //
-let appName    = "[WEB API DEMO - CHAT]";
+let appName = "[WEB API DEMO - CHAT]";
 //
 let appVersion = "1.0.0.1";
 //
 let chatPortNumber = 3000;
 //
-const express = require('express');
+const express = require("express");
 const app = express();
-const http = require('http').Server(app);
+const http = require("http").Server(app);
 //const cors = require('cors');
 //const io   = require('socket.io')(http);
-const io   = require('socket.io')(http, {
+const io = require("socket.io")(http, {
   cors: {
-      origin: "http://localhost:4200",
-      methods: ["GET", "POST"],
-      credentials: true,
-  }
+    //origin: "http://localhost:4200",
+    origin: "*",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
 });
 
 //---------------------------------------------------
@@ -28,13 +29,13 @@ app.use(cors({
   credentials: false,                      
 }));*/
 
-
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200'); // Replace with your client's origin
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Specify allowed methods
-  res.header('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+  //res.header("Access-Control-Allow-Origin", "http://localhost:4200"); // Replace with your client's origin
+  res.header("Access-Control-Allow-Origin", "*"); // Replace with your client's origin
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // Specify allowed methods
+  res.header("Access-Control-Allow-Credentials", "true"); // Allow credentials
   //res.header('Access-Control-Allow-Credentials', 'false'); // Allow credentials
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Specify allowed headers
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Specify allowed headers
   //res.header('Access-Control-Allow-Headers', '*'); // Specify allowed headers
   next();
 });
@@ -86,4 +87,3 @@ io.on("connection", (socket) => {
 http.listen(chatPortNumber, () => {
   console.log("Server listening on port " + chatPortNumber);
 });
-
