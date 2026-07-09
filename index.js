@@ -14,7 +14,7 @@ const io = require("socket.io")(http, {
   cors: {
     //origin: "http://localhost:4200",
     //origin: "*",
-    origin: "https://apereznwo.github.io/",
+    origin: "https://apereznwo.github.io",
     methods: ["GET", "POST"],
     credentials: true,
   },
